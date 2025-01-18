@@ -21,7 +21,7 @@ data = pd.read_excel(file_data)
 # Título de la aplicación
 st.title("📍 Validación de Direcciones y Cobertura")
 
-# Mostrar una vista previa de los datos
+# Mostrar una vista previa de los datos (para ver si cargó correctamente)
 st.write("### Vista previa de los datos:", data.head())
 
 # Verificar que las columnas necesarias existan
@@ -29,13 +29,13 @@ required_columns = {"Direccion", "Ciudad", "Cobertura", "Estrato"}
 if not required_columns.issubset(data.columns):
     st.error(f"El archivo debe contener las columnas: {', '.join(required_columns)}")
 else:
-    # Solicitar la dirección y ciudad
-    direccion = st.text_input("Ingrese la dirección:")
-    ciudad = st.text_input("Ingrese la ciudad:")
+    # Solicitar la dirección y ciudad con los campos de entrada
+    direccion = st.text_input("Ingrese la dirección:")  # Campo de texto para la dirección
+    ciudad = st.text_input("Ingrese la ciudad:")  # Campo de texto para la ciudad
 
     # Botón para realizar la búsqueda
     if st.button("Enviar"):
-        if direccion and ciudad:
+        if direccion and ciudad:  # Verificar que se ingresaron ambos datos
             # Filtrar los datos de acuerdo con la dirección y ciudad
             resultado = data[(data["Direccion"] == direccion) & (data["Ciudad"] == ciudad)]
             if not resultado.empty:
